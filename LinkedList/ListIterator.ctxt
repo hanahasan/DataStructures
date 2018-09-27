@@ -2,4 +2,13 @@
 comment0.params=
 comment0.target=java.lang.Object\ next()
 comment0.text=\r\n\ Moves\ Iterator\ past\ the\ next\ element\r\n\ @return\ \ \ \ the\ traversed\ element\ \r\n
-numComments=1
+comment1.params=
+comment1.target=boolean\ hasNext()
+comment1.text=\r\n\ Tests\ if\ there\ is\ an\ element\ after\ the\ iterator\ position\r\n\ @return\ true\ if\ there\ is\ an\ element\ after\ the\ iterator\ position\r\n
+comment2.params=element
+comment2.target=void\ add(java.lang.Object)
+comment2.text=\r\n\ adds\ an\ element\ before\ the\ iterator\ position\r\n\ and\ moves\ the\ iterrator\ past\ the\ inserted\ element\r\n\ @param\ element\ to\ add\r\n
+comment3.params=
+comment3.target=void\ remove()
+comment3.text=\r\n\ removes\ the\ last\ traversed\ element.\ this\ method\ may\ \r\n\ only\ be\ called\ after\ a\ call\ to\ the\ next\ method\r\n
+numComments=4

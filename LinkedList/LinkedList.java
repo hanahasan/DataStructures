@@ -89,7 +89,7 @@ public class LinkedList
         {
            if (!hasNext())
            {
-               throw NoSuchElementException();
+               throw new NoSuchElementException();
            }
            
            previous = position; //so items can be removed
@@ -102,7 +102,7 @@ public class LinkedList
             }
            else
            {
-               position = position.next();
+               position = position.next;
             }
            
            return position.data;
@@ -112,13 +112,50 @@ public class LinkedList
         {
             if (position == null) 
             {
-                return ! = null;
+                return first != null;
             }
-            else 
-            {
-                return position.next != null; 
-            }
+            
+            return position.next != null; 
+        
         }
         
+        public void add(Object element)
+        {
+            if (position == null) 
+            {
+                addFirst(element);
+                position = first;
+            }
+            else
+            {
+                Node newNode = new Node(); 
+                newNode.data = element; 
+                newNode.next = position.next;
+                position.next = newNode; 
+                position = newNode; 
+            }
+            
+            isAfterNext = false; 
+        }
+        
+        public void remove() 
+        {
+            if(!isAfterNext) 
+            {
+                throw new IllegalStateException();
+            }
+            if (position == first) 
+            {
+                removeFirst(); 
+            }
+            
+            else
+            {
+                previous.next = position.next;
+            }
+            position = previous; 
+            isAfterNext = false; 
+            }
+        }
     }
-}
+
