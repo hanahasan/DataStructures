@@ -1,161 +1,243 @@
-import java.util.NoSuchElementException;
+
+import java.util.NoSuchElementException; 
+import java.util.*; 
+//import java.util.IllegalStateException; 
+
 /**
- * Write a description of class LinkedList here.
- * 
- * @author (your name) 
+ * Just keeps track of stuff- not the actual data 
+ * @author Sarah Walz
  * @version (a version number or a date)
  */
 public class LinkedList
 {
-    private Node first; 
+    //Single linked list
+    private Node first;
+    //needs to access to all nods- so we need an inner class
     
+    //can get at public data from node- but cannot acess this outside this class
     class Node
     {
-        //old skool 
-        //any object into and out of a linked list 
-        //cast to give the object a type whn object is removed
-        public Object data; 
+        // Old School 
+        //Put any object into and out of linkedlist
+        //cast to type the object as we remove 
+        public Object data;
         public Node next; 
     }
-    
+        
     /**
-     * Linked Constructor 
+     * Default constructor for objects of class LinkedList
      */
     public LinkedList()
     {
         // initialise instance variables
-        first = null;
-    }
-
-    /**
-     * Adds element to the front of the Linked List
-     * @param element to add
-     */
-    public void addFirst(Object element)
-    {
-        Node newNode = new Node(); 
-        newNode.data = element; //points to object 
-        newNode.next = first; 
-        first = newNode; 
+        first= null; 
     }
     
     /**
-     * returns the first element in the Linked List 
-     * @return first element in linked list 
+     * Adds an element to the front of the LL
+     * @param element, the element to add 
+     */
+    public void addFirst(Object element)
+    {
+        Node newNode = new Node(); // is polymorphic- can be anything
+        newNode.data= element; //the data will point to the object
+        newNode.next= first; 
+        first= newNode; 
+    }
+    
+    /**
+     * 
+     */
+    public void faultyAddFirst(Object element) 
+    {
+        Node newNode = new Node();
+        first = newNode; 
+        newNode.data = element; 
+        newNode.next = first; 
+    }
+       
+    /**
+     * Retruns the first element of the LL
+     * @return the first element as object
      */
     public Object getFirst()
     {
-        if (first == null) 
-        {
-            throw new NoSuchElementException();
-        }
+        if (first== null) {throw new NoSuchElementException();}
         return first.data; 
     }
     
     /**
-     * Removes te first element in the linked list
-     * @return the removed element
+     * Removes the first element in the LL
+     * @return the removed element 
      */
     public Object removeFirst()
     {
-        if (first == null) 
-        {
-            throw new NoSuchElementException();
+        if (first== null) {throw new NoSuchElementException();}
+        Object temp= first.data;
+        first= first.next;
+        return temp; 
+    }
+    
+    /**
+     * Reverses the List linkes
+     * e16.1
+     */
+    public void reverse()
+    {
+       if (first== null) return; 
+       
+       Node previous = first; 
+       Node current = first.next; 
+       first.next = null; 
+       while (current != null) 
+       {
+           Node next = current.next; 
+           current.next = previous; 
+           previous = current; 
+           current = next; 
         }
-        //links have to be maintained 
-        Object element = first.data;
-        first = first.next;
-        return element;
+       first = previous; 
+    }
+    
+    /**
+     * 
+     */
+    public int size() 
+    {
+        int count= 0; 
+        //if (first== null) return count; 
+        
+        Node temp = first; 
+        //count++; 
+        
+        while(temp!= null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        
+        return count; 
     }
     
     public ListIterator listIterator()
     {
-        return new LinkedListIterator(); 
+       return new LinkedListIterator();  
     }
     
-    class LinkedListIterator implements ListIterator
+    public String toString() 
+    {
+        ListIterator iter = this.listIterator(); 
+        String returnString = ""; 
+        while (iter.hasNext()) 
+        {
+            returnString += iter.next() + " ";
+        }
+        return returnString; 
+    }
+    
+   
+    
+    class LinkedListIterator implements ListIterator //could implement iterator interface- but has extra methods we don't need
     {
         private Node position; 
-        private Node previous; //need it to remove
-        private boolean isAfterNext;
+        private Node previous;  //this is so we can remove 
+        private boolean isAfterNext; 
         
         public LinkedListIterator()
         {
-            previous = null; 
-            position = null;
-            isAfterNext = false; 
-        }
-        public Object next() 
-        {
-           if (!hasNext())
-           {
-               throw new NoSuchElementException();
-           }
-           
-           previous = position; //so items can be removed
-           isAfterNext = true; 
-           
-           if (position == null) 
-           {
-               //its at the end, want to move it back to the beginning 
-               position = first; //address/ref to Objects
-            }
-           else
-           {
-               position = position.next;
-            }
-           
-           return position.data;
+            position= null; 
+            previous= null;
+            isAfterNext= false;  
         }
         
-        public boolean hasNext() 
+        
+        /**
+        * Moves the iterator past the next element 
+        * @return the traversed element 
+        */
+        public Object next()
         {
-            if (position == null) 
-            {
-                return first != null;
-            }
+            if (!hasNext()) {throw new NoSuchElementException();}
             
-            return position.next != null; 
-        
-        }
-        
-        public void add(Object element)
-        {
-            if (position == null) 
+            previous= position; //purly so that I can remove item
+            isAfterNext= true; 
+            
+            if (position == null)//which means we would be at the very end or just started it
             {
-                addFirst(element);
-                position = first;
+                position= first; //just adress/references to objects
             }
             else
             {
-                Node newNode = new Node(); 
-                newNode.data = element; 
-                newNode.next = position.next;
-                position.next = newNode; 
-                position = newNode; 
+                position= position.next;
             }
-            
-            isAfterNext = false; 
+                        
+            return position.data; 
         }
         
-        public void remove() 
+        /**
+        *Tests if there is a next element
+        * @return true if there is a next element 
+        */
+        public boolean hasNext()
         {
-            if(!isAfterNext) 
+            if (position ==  null)
             {
-                throw new IllegalStateException();
+                return first!= null; 
             }
-            if (position == first) 
+            else
+            {
+                return position.next != null; 
+            }
+        }
+        
+        /**
+         * Adds an element before the interator position
+         * and moves the iterator past the inserted element
+         * @param element the element to add
+         */
+        public void add(Object element)
+        {
+            if(position == null)
+            {
+                addFirst(element); 
+                position=first; 
+            }
+            else
+            {
+                Node newNode = new Node();
+                
+                newNode.data= element; 
+                newNode.next= position.next;
+                position.next= newNode;
+                position= newNode; //moved forward one
+            }
+            
+            isAfterNext= false; 
+        }
+        
+        /**
+         * Removes the last traversed element. this method may 
+         * only be called after moving forward
+         */
+        public void remove()
+        {
+            if (!isAfterNext){throw new IllegalStateException();}
+            
+            if (position == first)
             {
                 removeFirst(); 
             }
-            
             else
             {
-                previous.next = position.next;
+                previous.next= position.next; 
+                
             }
-            position = previous; 
-            isAfterNext = false; 
-            }
+            position= previous; 
+            isAfterNext= false; 
         }
+        
+        
     }
+        
 
+}
