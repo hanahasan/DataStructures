@@ -1,3 +1,4 @@
+
 import java.util.NoSuchElementException;
 
 /**
@@ -73,14 +74,14 @@ public class CircularArrayQueue
    
    public void firstToLast() 
    {
-       Object newHead = elements[tail];
-       Object newTail = elements[head]; 
+       Object newHead = elements[elements.length-1];
+       Object newTail = elements[0]; 
        elements[tail] = newTail;
        elements[head] = newHead; 
     }
     
-   public String toString()
+   /*public String toString()
    {
        
-    }
+    }*/
 }
