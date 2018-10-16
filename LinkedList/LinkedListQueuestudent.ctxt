@@ -14,4 +14,6 @@ comment3.text=\r\n\ \ \ \ \ \ Adds\ an\ element\ to\ the\ tail\ of\ this\ queue.
 comment4.params=
 comment4.target=java.lang.Object\ remove()
 comment4.text=\r\n\ \ \ \ \ \ Removes\ an\ element\ from\ the\ head\ of\ this\ queue.\r\n\ \ \ \ \ \ @return\ the\ removed\ element\r\n
-numComments=5
+comment5.params=
+comment5.target=void\ LastToFirst()
+numComments=6

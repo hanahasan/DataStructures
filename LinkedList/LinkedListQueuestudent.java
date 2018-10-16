@@ -82,6 +82,23 @@ public class LinkedListQueuestudent
         }
        return element;
     }
+    
+   public void LastToFirst()
+   {
+       Node newNode = tail; 
+       newNode.next = head; 
+       
+       head = newNode; 
+       
+       Node temp = head; 
+       while (temp.next != tail) 
+       {
+           temp = temp.next;
+        }
+        
+        tail = temp; 
+        tail.next = null; 
+    }
 
    class Node
    {

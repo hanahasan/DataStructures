@@ -15,11 +15,10 @@ public class QueueTest
         q.add("Tom");
         q.add("Diana"); 
         q.add("Harry"); 
-        q.firstToLast();
-        while (!q.empty())
-        {
-            System.out.println(q.remove());
-        }
+        //q.firstToLast();
+        q.LastToFirst();
+        
+        System.out.print(q);
         
         
     }

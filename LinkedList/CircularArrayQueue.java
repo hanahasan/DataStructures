@@ -76,12 +76,24 @@ public class CircularArrayQueue
    {
        Object newHead = elements[elements.length-1];
        Object newTail = elements[0]; 
-       elements[tail] = newTail;
        elements[head] = newHead; 
+       elements[tail] = newTail;
     }
     
-   /*public String toString()
+   public void LastToFirst()
    {
-       
-    }*/
+       //Object newHead = tail ;
+       //elements[head] = newHead;
+      
+    }
+    
+   public String toString()
+   {
+       String printOut = ""; 
+       for (Object thing: elements) 
+       {
+           printOut += thing + "\n"; 
+        }
+       return printOut;
+    }
 }
