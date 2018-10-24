@@ -11,6 +11,7 @@ public class TestDataStruct
      */
     public static void main (String [] args)
     {
+        
         //right now set up like a set, last in, last out
         LinkedList lister= new LinkedList(); 
         String word= "New"; 
@@ -18,9 +19,7 @@ public class TestDataStruct
         lister.addFirst(new String ("wahhh"));
         lister.addFirst(new String("Two")); //linked list is now [two] [new]
         
-        
-        
-        
+        /*
         //String word2= lister.getFirst(); //this returns as object- but word 2 is not an object 
         
         //OLD school- had to cast the object first
@@ -47,7 +46,15 @@ public class TestDataStruct
             System.out.println("It works");
         else
             System.out.println("It doesn't work- FAIL\n");
+        */
+       
+        lister.set(0, "works");
+        System.out.println(lister.get(0)); 
         
+        System.out.println(lister);
+        
+        System.out.println(lister.contains("not contains")); 
+        System.out.println(lister.contains("works")); 
         
               
         

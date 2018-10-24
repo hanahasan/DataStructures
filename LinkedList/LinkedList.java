@@ -135,6 +135,43 @@ public class LinkedList
         return returnString; 
     }
     
+    public Object get(int n) 
+    {
+        return getNode(n).data;
+        
+    }
+    
+    public void set(int n, Object newElement)
+    {
+        getNode(n).data = newElement;
+    }
+    
+    private Node getNode(int n) 
+    {
+        Node temp = new Node(); 
+        temp = first;
+        for (int i = 0; i < n ; i++)
+        {
+            temp = temp.next;
+            
+        }
+        return temp;
+    }
+    
+    public boolean contains(Object obj)
+    {
+        Node temp = new Node(); 
+        temp = first;
+        while (temp.next != null)
+        {
+            if (temp.data.equals(obj))
+            {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
    
     
     class LinkedListIterator implements ListIterator //could implement iterator interface- but has extra methods we don't need
